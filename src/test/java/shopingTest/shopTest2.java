@@ -41,15 +41,15 @@ public class shopTest2 {
 		
 		assertEquals(UtilsShop.liczkwote(driver), UtilsShop.liczkwote2(driver),2);
 	}*/
-	@Test
+	//@Test
 
-	public void test() {
+/*	public void testPorownujeSumeCenSukienekITotalPrice() {
 		UtilsShop.logowanie(driver);
 		for (int i = 1; i <3; i++) {
 		UtilsShop.naWomen(driver);
 		UtilsShop.rozmiarS(driver);
 		UtilsShop.waitForAjax(driver);
-		UtilsShop.naCzerwona(driver, i);
+		UtilsShop.naCzerwonaV2(driver, i);
 		UtilsShop.addToChart(driver);
 		UtilsShop.waitForAjax(driver);
 		UtilsShop.proceed(driver);
@@ -59,8 +59,32 @@ public class shopTest2 {
 	
 		
 		assertEquals(UtilsShop.zliczWszystkieKwotySukienek(driver), UtilsShop.liczTotalPrice(driver),2);
-/*		double cenaProduktu = zakupyUtil.cenaPierwszegoProduktu(driver);
-		double total = zakupyUtil.totalsum(driver);
-		assertEquals(total, cenaProduktu,2);*/
+
 }
-}
+}*/
+/*	@Test
+	public void czySumaCenProduktowPoZwiekoszonejIlosciJestZgodnazTotalemSumy() {
+		UtilsShop.logowanie(driver);
+		UtilsShop.naWomen(driver);
+		UtilsShop.rozmiarS(driver);
+		UtilsShop.waitForAjax(driver);
+		UtilsShop.naCzerwona(driver);
+		UtilsShop.addToChart(driver);
+		UtilsShop.waitForAjax(driver);
+		UtilsShop.proceed(driver);
+		UtilsShop.klinieciePlusa(driver);
+		UtilsShop.waitForAjax(driver);
+		assertEquals(UtilsShop.liczbaMnoznika(driver)*UtilsShop.liczkwote(driver), UtilsShop.liczTotalPrice(driver),2);
+	}*/
+	
+	@Test
+	public void czySortowanieDziala() {
+		UtilsShop.logowanie(driver);
+		UtilsShop.naWomen(driver);
+		UtilsShop.ustawComboNaLowersPrice(driver);
+		UtilsShop.waitForAjax(driver);
+		UtilsShop.naCzerwona(driver);
+		assertEquals("Printed Chiffon Dress", UtilsShop.printedChiffonDress(driver));
+		
+	}
+	}

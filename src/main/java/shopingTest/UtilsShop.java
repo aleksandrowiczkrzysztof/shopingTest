@@ -8,6 +8,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class UtilsShop {
@@ -31,8 +32,14 @@ public class UtilsShop {
 		woman.click();
 	}
 
-	public static void naCzerwona(WebDriver driver, int nrObrazka) {
-		WebElement czerwona = driver.findElement(By.xpath("//*[@id=\"center_column\"]/ul/li["+nrObrazka+"]/div/div[1]/div/a[1]"));
+	public static void naCzerwona(WebDriver driver) {
+		WebElement czerwona = driver
+				.findElement(By.xpath("//*[@id=\"center_column\"]/ul/li[1]/div/div[1]/div/a[1]"));
+		czerwona.click();
+	}
+	public static void naCzerwonaV2(WebDriver driver, int nrObrazka) {
+		WebElement czerwona = driver
+				.findElement(By.xpath("//*[@id=\"center_column\"]/ul/li[" + nrObrazka + "]/div/div[1]/div/a[1]"));
 		czerwona.click();
 	}
 
@@ -40,41 +47,67 @@ public class UtilsShop {
 		WebElement addToChart = driver.findElement(By.xpath("//*[@id=\"add_to_cart\"]/button/span"));
 		addToChart.click();
 	}
-
+	public static void klinieciePlusa(WebDriver driver) {
+		WebElement klikniecie = driver.findElement(By.xpath("//*[@id=\"cart_quantity_up_1_1_0_31337\"]/span"));
+	klikniecie.click();
+	}
+public static int  liczbaMnoznika(WebDriver driver) {
+	WebElement mnoznik = driver.findElement(By.xpath("//*[@id=\"product_1_1_0_31337\"]/td[5]/input[1]"));
+			String tekst = mnoznik.getAttribute("value");
+				return Integer.parseInt(tekst);
+}
 	public static void proceed(WebDriver driver) {
 		WebElement proceed = driver.findElement(By.xpath("//*[@id=\"layer_cart\"]/div[1]/div[2]/div[4]/a/span"));
 		proceed.click();
 	}
+	public static double cenaPojedynczegoProduktu(WebDriver driver) {
+		WebElement cenaJednego = driver.findElement(By.xpath("//*[@id=\"product_price_1_1_31337\"]/span"));
+		String cena = cenaJednego.getText().substring(1);
+		return Double.parseDouble(cena);	}
+
 	public static void rozmiarS(WebDriver driver) {
 		WebElement rozmiarS = driver.findElement(By.xpath("//*[@id=\"uniform-layered_id_attribute_group_1\"]/span"));
 		rozmiarS.click();
 	}
+
 	public static double liczkwote(WebDriver driver) {
 		WebElement kwota = driver.findElement(By.xpath("//*[@id=\"product_1_1_0_31337\"]/td[4]"));
 		String cena = kwota.getText().substring(1);
-		
-				return Double.parseDouble(cena);
+
+		return Double.parseDouble(cena);
 	}
+	public static void ustawComboNaLowersPrice(WebDriver driver) {
+		WebElement combo = driver.findElement(By.xpath("//*[@id=\"selectProductSort\"]"));
+		Select listaRozwijana = new Select(combo);
+		listaRozwijana.selectByValue("price:asc");
+	}
+	public static String printedChiffonDress(WebDriver driver) {
+		WebElement nazwa = driver.findElement(By.xpath("//*[@id=\"center_column\"]/div/div/div[3]/h1"));
+		String nazwa2 = nazwa.getText();
+		return nazwa2;
+	}
+
 	public static double liczTotalPrice(WebDriver driver) {
 		WebElement kwota = driver.findElement(By.xpath("//*[@id=\"total_product\"]"));
 		String cena = kwota.getText().substring(1);
 		return Double.parseDouble(cena);
 	}
+
 	public static double zliczWszystkieKwotySukienek(WebDriver driver) {
 		WebElement tabela = driver.findElement(By.xpath("//*[@id=\"cart_summary\"]/tbody"));
-		List<WebElement> trki = tabela.findElements(By.tagName("tr"));////*[@id="cart_summary"]/tbody
+		List<WebElement> trki = tabela.findElements(By.tagName("tr"));//// *[@id="cart_summary"]/tbody
 		double suma = 0;
-		for(WebElement tr : trki ) {
+		for (WebElement tr : trki) {
 			List<WebElement> tede = tr.findElements(By.tagName("td"));
 			tede.get(5);
 			WebElement cena = tede.get(5);
 			String cenaString = cena.getText().substring(1);
 			suma = suma + Double.parseDouble(cenaString);
-			System.out.println(suma);
 		}
-			return suma;
-			
-		}
+		System.out.println(suma);
+		return suma;
+
+	}
 
 	public static boolean waitForAjax(WebDriver driver) {
 
